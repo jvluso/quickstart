@@ -1,0 +1,464 @@
+
+ <!DOCTYPE html>
+<html>
+<body>
+<div>
+Find the Mixed strategy Nash equilibrium for a finite, symmetric, 0-sum game.
+
+</div>
+<div>
+
+<input type="text" id="size" onkeyup="updateText('name1c','name1r')">
+
+<button id="resize" onclick="Resize()">resize</button>
+</div>
+<div id = "matrix_div">
+<table id="profit_matrix" border="1" onkeyup="updateTable()">
+  <tr>
+    <td></td>
+    <td><input type="text" id="name0c" data-pair="name0r"></td>
+    <td><input type="text" id="name1c" data-pair="name1r"></td>
+    <td><input type="text" id="name2c" data-pair="name2r"></td>
+  </tr>
+  <tr>
+    <td><span id="name0r">rock</span></td>
+    <td><span id="0,0">0</span></td>
+    <td><span id="1,0">0</span></td>
+    <td><span id="2,0">0</span></td>
+  </tr>
+  <tr>
+    <td><span id="name1r">paper</span></td>
+    <td><input type="text" id="0,1" data-pair="1,0"></td>
+    <td><span id="1,1">0</span></td>
+    <td><span id="2,1">0</span></td>
+  </tr>
+  <tr>
+    <td><span id="name2r">scissors</span></td>
+    <td><input type="text" id="0,2" data-pair="2,0"></td>
+    <td><input type="text" id="1,2" data-pair="2,1"></td>
+    <td><span id="2,2">0</span></td>
+  </tr>
+</table> 
+<button id="calculate" onclick="Calculate()">submit</button>
+</div>
+
+<div>
+<span id="results">results</span>
+</div>
+
+<div>
+https://www.youtube.com/watch?v=qOLXyFchZfY
+
+try two part simplex
+
+node app.js
+
+</div>
+</body>
+</html>  
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+   
+    var socket = io();
+       
+    socket.on('rref_result',function(data){
+		document.getElementById("results").innerHTML = "calculated"
+        var array = data.array;
+		console.log(array);
+		displayArray(array);
+		
+	});
+	
+	function displayArray(array){
+        var table = document.createElement("table");
+		table.border = 1;
+        for (var i = 0; i < array.length; i++) {
+            var row = table.insertRow(-1);
+			
+            for (var j = 0; j < array[i].length; j++) {
+                var Cell = row.insertCell(-1);
+                Cell.appendChild(document.createTextNode(array[i][j]));
+			}
+        }
+        document.getElementById("results").appendChild(table);
+    }
+	
+	function reportValue(column,value){
+        var div = document.createElement("div");
+        div.appendChild(document.createTextNode(
+		"play "+column+" "+value+"% of the time"
+		));
+		
+		document.getElementById("results").appendChild(div);
+    }
+	
+    function updateNum(element){
+	    console.log(element);
+	    var pairID = element.getAttribute("data-pair");
+        var toField = document.getElementById(pairID);
+        toField.innerHTML=-element.value;
+    }
+	
+    function updateText(element){
+	    console.log(element);
+	    var pairID = element.getAttribute("data-pair");
+        var toField = document.getElementById(pairID);
+        toField.innerHTML=element.value;
+    }
+	
+
+	function updateTable(){
+        for (var i = 0; i < size; i++) {
+            updateText(document.getElementById("name"+i+"c"));
+			
+			
+            for (var j = 0; j < i; j++) {
+                updateNum(document.getElementById(j+","+i));
+			}
+        }
+	}
+	
+	
+	
+	
+	//the first row of the array for the tableau is the objective row
+	
+	
+	
+	function simplexMinimize(array){
+	
+	    var pivotCol = -1;
+		var maximum = 0;
+		for (var i = 0; i < array[0].length-1; i++) {
+		    if(array[0][i]>maximum){
+			    pivotCol = i;
+				maximum = array[0][i];
+			}
+		}
+		if(pivotCol==-1) return array;
+		
+		
+		return simplexMinimize(simplexPivot(array,pivotCol));
+	}
+	
+	//if the var is not basic, returns 0
+	function basicRow(array,col){
+	    var row = 0;
+		for (var i = 1; i < array.length-1; i++) {
+		    console.log(row);
+		    if(array[i][col]!=0){
+			    if(row==0 && array[i][col]==1){
+				    row = i;
+				}
+				else return 0;
+			}
+		}
+		return row;
+	}
+	
+	function simplexMaximize(array){
+	
+	
+	    var pivotCol = -1;
+		var minimum = 0;
+		for (var i = 0; i < array[0].length-1; i++) {
+		    if(array[0][i]<minimum){
+			    pivotCol = i;
+				minimum = array[0][i];
+			}
+		}
+		if(pivotCol==-1) return array;
+		
+		
+		return simplexMinimize(simplexPivot(array,pivotCol));
+	}
+	
+	function simplexPivot(array, col){
+	
+		    console.log("pivot");
+		    console.log(array);
+		    console.log(col);
+	    //find the pivot row
+		var pivotRow = -1;
+		var minRatio = -1;
+		for (var i = 1; i < array.length; i++) {
+            if (array[i][col] > 0){
+			    if(minRatio == -1){
+				    minRatio = array[i][array[0].length-1]/array[i][col];
+					pivotRow = i;
+				}else if(array[i][array[0].length-1]/array[i][col] < minRatio){
+				    minRatio = array[i][array[0].length-1]/array[i][col];
+					pivotRow = i;
+				}
+			}
+					
+        }
+		if(pivotRow == -1){
+		    console.log(array);
+		    console.log(col);
+		    return;
+		}
+		
+		//normalize the pivot row
+		
+		var pivotVar = array[pivotRow][col];
+		for (var i = 0; i < array[0].length; i++) {
+		    array[pivotRow][i] = array[pivotRow][i]/pivotVar;
+	    }
+		
+		
+		//pivot other rows
+		
+		for (var i = 0; i < array.length; i++) {
+		    if(array[i][col] != 0 && i != pivotRow){
+			    var ratio = array[i][col];
+			    for (var j = 0; j < array[0].length; j++) {
+				    array[i][j] = subtract(array[i][j],ratio*array[pivotRow][j]);
+				}
+			}
+		}
+		return array;
+	}
+	
+	
+	//rounding errors are a problem, this should help.
+	function subtract(a,b){
+	    var result = a-b;
+		if(Math.abs(result)<0.00000001) result = 0;
+		return result;
+	}
+	
+	
+	//creates the initial tableau for phase 1 of the 2 phase simplex method
+	function simplexCreate(array){
+	    //check for positive or negative rows before this
+		
+	    var tableau = zero2D(array.length+2, 2*array.length+1);
+		var tableauLastCol = zero2D(array.length+2,1);
+		
+		
+		for (var i = 0; i < array.length; i++) {
+			for (var j = 1; j < array[0].length; j++) {
+		        tableau[i+1][j-1] = array[i][j]-array[i][0];
+			}
+			
+			tableau[i+1][array.length-1] = -1;
+			tableau[i+1][i+1+array.length-1] = 1;
+			tableauLastCol[i+1][0] = -array[i][0];
+			if(array[i][0]>0){
+			    
+			    for (var j = 0; j < tableau[i+1].length; j++) {
+		            tableau[i+1][j] *= -1;
+			    }
+			    tableauLastCol[i+1][0] *= -1;
+				
+			    for (var j = 0; j < tableau.length; j++) {
+		            tableau[j].push(0);
+			    }
+				tableau[0][tableau[i+1].length-1] = -1;
+				tableau[i+1][tableau[i+1].length-1] = 1;
+			}
+		}
+		for (var i = 1; i < array.length; i++) {
+		    tableau[tableau.length-1][i-1]=1;
+		}
+		tableau[tableau.length-1][2*array.length]=1;
+		tableauLastCol[tableau.length-1][0]=1;
+		
+		
+		
+		for (var i = 0; i < tableau.length; i++) {
+		    tableau[i].push(tableauLastCol[i][0]);
+		}
+	    
+		
+		
+		for (var i = 2*array.length+1; i < tableau[0].length-1; i++) {
+		    tableau = simplexPivot(tableau, i);
+		}
+		return(tableau);
+	}
+	
+    function zero2D(rows, cols) {
+        var array = [], row = [];
+        while (cols--) row.push(0);
+        while (rows--) array.push(row.slice());
+        return array;
+    }
+
+
+	
+	var size = 3;
+	function Resize(){
+        var table = document.getElementById("profit_matrix");
+		while (table.hasChildNodes()) {
+            table.removeChild(table.firstChild);
+        }
+		size = document.getElementById("size").value; 
+        var row = table.insertRow(-1);
+        row.insertCell(-1);
+        for (var i = 0; i < size; i++) {
+            var Cell = row.insertCell(-1);
+			var nameInput = document.createElement("input");
+			nameInput.id = "name"+i+"c";
+		    nameInput.setAttribute("data-pair","name"+i+"r");
+			nameInput.setAttribute("type","text");
+		    Cell.appendChild(nameInput);
+        }
+        for (var i = 0; i < size; i++) {
+            var row = table.insertRow(-1);
+            var Cell1 = row.insertCell(-1);
+			var nameCopy = document.createElement("span");
+			nameCopy.id = "name"+i+"r";
+		    Cell1.appendChild(nameCopy);
+			
+            for (var j = 0; j < size; j++) {
+                var Cell = row.insertCell(-1);
+			
+                if(i<=j){
+			        var cellContents = document.createElement("span");
+			        cellContents.id = j+","+i;
+					cellContents.appendChild(document.createTextNode("0"));
+				}else{
+			        var cellContents = document.createElement("input");
+			        cellContents.id = j+","+i;
+					cellContents.setAttribute("data-pair",i+","+j);
+					cellContents.setAttribute("type","text");
+				}
+		        Cell.appendChild(cellContents);
+			}
+        }
+	}
+	
+	function readArray(){
+	    var array = [];
+        for (var i = 0; i < size; i++) {
+            var row = [];
+			
+            for (var j = 0; j < size; j++) {
+                if(i<j){
+				    row.push(-document.getElementById(i+","+j).value);
+				}else if(i==j){
+				    row.push(0);
+				}else{
+				    row.push(document.getElementById(j+","+i).value*1);
+				}
+			}
+			array.push(row);
+        }
+		return array;
+	}
+	
+	function removeDegenerateRow(array,degenerateRows){
+	    //necessary for recursion
+		if(array.length<=1) return (array,degenerateRows);
+	
+        var i=0;
+        for (var j = 0; j < array.length; j++) {
+		    if(array[i][j]>=0){
+			    i++;
+				j=-1;
+				
+				if(i>=array.length) return (array,degenerateRows);
+			}
+		}
+		
+		//row i is degenerate
+		
+		array = array.splice(i,1);
+		for (var j = 0; j < array.length; j++) {
+		    array[j]=array[j].splice(i,1);
+		}
+		degenerateRows.push(i);
+		return removeDegenerateRow(array,degenerateRows);
+	}
+	
+	function CalculateSimp(){
+	    var array = readArray();
+		var degenerateRows = [];
+		array,degenerateRows = removeDegenerateRow(array,degenerateRows)
+		
+		console.log(array);
+		console.log(degenerateRows);
+		var tableau = simplexCreate(array);
+		tableau = simplexMinimize(tableau);
+		
+		//phase 1 complete. check if done
+		if(basicRow(tableau, array.length-1) != 0){
+	    	//remove artificial vars
+            for (var i = 0; i < tableau.length; i++) {
+		       tableau[i].splice(2*array.length+1,tableau[i].length-2*array.length-2);
+		    }
+		
+		
+	    	//replace the objective row
+            for (var i = 0; i < tableau[0].length; i++) {
+    		    tableau[0][i]=0;
+	    	}
+	    	//w is in the column at array.length-1
+	    	tableau[0][array.length-1] = -1;
+	    	simplexPivot(tableau, array.length-1);
+		
+	    	//start phase 2
+		
+	    	tableau = simplexMaximize(tableau)
+		}
+		
+		//read the tableau
+		var j=1;
+		var values = [1]
+        for (var i = 1; i < array.length+degenerateRows.length; i++) {
+		    if(degenerateRows.indexOf(i)>-1){
+			    values.push(0);
+			} else {
+			    var row = basicRow(tableau, j-1);
+				j++;
+			    if(row==0){
+				    values.push(0);
+				} else {
+				    values.push(tableau[row][tableau[row].length-1]);
+				    values[0]=subtract(values[0],tableau[row][tableau[row].length-1]);
+				}
+			}
+		}
+		for (var i = 0; i < values.length; i++) {
+		    reportValue(i,values[i]);
+		}
+		
+	}
+	
+	var Calculate = CalculateSimp;
+	
+	function CalculateRREF(){
+	    var array = [];
+        var row = [];
+        for (var i = 0; i <= size; i++) {
+            row.push(1);
+		}
+		array.push(row);
+        for (var i = 2; i <= size; i++) {
+            var row = [];
+			
+            for (var j = 1; j <= size; j++) {
+                if(i<j){
+				    row.push(-document.getElementById(i+","+j).value);
+				}else if(i==j){
+				    row.push(0);
+				}else{
+				    row.push(document.getElementById(j+","+i).value*1);
+				}
+			}
+			row.push(0);
+			array.push(row);
+        }
+		
+		document.getElementById("results").innerHTML = "calculating";
+		
+	    socket.emit('rref',{
+		    array:array
+	    });
+		
+	}
+</script>
+

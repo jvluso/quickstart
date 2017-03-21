@@ -1,0 +1,362 @@
+[
+	{
+		"AName": "Saphire Ruby Morgan McBombus",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 1,
+		"BRank": 0,
+		"AWins": 122,
+		"BWins": 184
+	},
+	{
+		"AName": "Saphire Wild Ivan Slagpot",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 2,
+		"BRank": 0,
+		"AWins": 99,
+		"BWins": 81
+	},
+	{
+		"AName": "Saphire Wild Ivan Slagpot",
+		"BName": "Saphire Ruby Morgan McBombus",
+		"ARank": 2,
+		"BRank": 1,
+		"AWins": 80,
+		"BWins": 55
+	},
+	{
+		"AName": "Ruby Angus the Arsonist",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 3,
+		"BRank": 0,
+		"AWins": 66,
+		"BWins": 94
+	},
+	{
+		"AName": "Ruby Angus the Arsonist",
+		"BName": "Saphire Ruby Morgan McBombus",
+		"ARank": 3,
+		"BRank": 1,
+		"AWins": 63,
+		"BWins": 63
+	},
+	{
+		"AName": "Ruby Angus the Arsonist",
+		"BName": "Saphire Wild Ivan Slagpot",
+		"ARank": 3,
+		"BRank": 2,
+		"AWins": 36,
+		"BWins": 25
+	},
+	{
+		"AName": "Blood Ruby Ivan Slagpot",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 4,
+		"BRank": 0,
+		"AWins": 106,
+		"BWins": 56
+	},
+	{
+		"AName": "Blood Ruby Ivan Slagpot",
+		"BName": "Saphire Ruby Morgan McBombus",
+		"ARank": 4,
+		"BRank": 1,
+		"AWins": 83,
+		"BWins": 51
+	},
+	{
+		"AName": "Blood Ruby Ivan Slagpot",
+		"BName": "Saphire Wild Ivan Slagpot",
+		"ARank": 4,
+		"BRank": 2,
+		"AWins": 27,
+		"BWins": 30
+	},
+	{
+		"AName": "Blood Ruby Ivan Slagpot",
+		"BName": "Ruby Angus the Arsonist",
+		"ARank": 4,
+		"BRank": 3,
+		"AWins": 33,
+		"BWins": 13
+	},
+	{
+		"AName": "Diamond Ruby Marshal Josephina",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 5,
+		"BRank": 0,
+		"AWins": 76,
+		"BWins": 85
+	},
+	{
+		"AName": "Diamond Ruby Marshal Josephina",
+		"BName": "Saphire Ruby Morgan McBombus",
+		"ARank": 5,
+		"BRank": 1,
+		"AWins": 62,
+		"BWins": 57
+	},
+	{
+		"AName": "Diamond Ruby Marshal Josephina",
+		"BName": "Saphire Wild Ivan Slagpot",
+		"ARank": 5,
+		"BRank": 2,
+		"AWins": 40,
+		"BWins": 19
+	},
+	{
+		"AName": "Diamond Ruby Marshal Josephina",
+		"BName": "Ruby Angus the Arsonist",
+		"ARank": 5,
+		"BRank": 3,
+		"AWins": 32,
+		"BWins": 23
+	},
+	{
+		"AName": "Diamond Ruby Marshal Josephina",
+		"BName": "Blood Ruby Ivan Slagpot",
+		"ARank": 5,
+		"BRank": 4,
+		"AWins": 25,
+		"BWins": 22
+	},
+	{
+		"AName": "Blood Bloodspinner Zorath",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 6,
+		"BRank": 0,
+		"AWins": 51,
+		"BWins": 85
+	},
+	{
+		"AName": "Blood Bloodspinner Zorath",
+		"BName": "Saphire Ruby Morgan McBombus",
+		"ARank": 6,
+		"BRank": 1,
+		"AWins": 43,
+		"BWins": 39
+	},
+	{
+		"AName": "Blood Bloodspinner Zorath",
+		"BName": "Saphire Wild Ivan Slagpot",
+		"ARank": 6,
+		"BRank": 2,
+		"AWins": 26,
+		"BWins": 20
+	},
+	{
+		"AName": "Blood Bloodspinner Zorath",
+		"BName": "Ruby Angus the Arsonist",
+		"ARank": 6,
+		"BRank": 3,
+		"AWins": 19,
+		"BWins": 23
+	},
+	{
+		"AName": "Blood Bloodspinner Zorath",
+		"BName": "Blood Ruby Ivan Slagpot",
+		"ARank": 6,
+		"BRank": 4,
+		"AWins": 14,
+		"BWins": 32
+	},
+	{
+		"AName": "Blood Bloodspinner Zorath",
+		"BName": "Diamond Ruby Marshal Josephina",
+		"ARank": 6,
+		"BRank": 5,
+		"AWins": 17,
+		"BWins": 31
+	},
+	{
+		"AName": "Blood Takahiro",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 7,
+		"BRank": 0,
+		"AWins": 51,
+		"BWins": 53
+	},
+	{
+		"AName": "Blood Takahiro",
+		"BName": "Saphire Ruby Morgan McBombus",
+		"ARank": 7,
+		"BRank": 1,
+		"AWins": 43,
+		"BWins": 44
+	},
+	{
+		"AName": "Blood Takahiro",
+		"BName": "Saphire Wild Ivan Slagpot",
+		"ARank": 7,
+		"BRank": 2,
+		"AWins": 27,
+		"BWins": 15
+	},
+	{
+		"AName": "Blood Takahiro",
+		"BName": "Ruby Angus the Arsonist",
+		"ARank": 7,
+		"BRank": 3,
+		"AWins": 27,
+		"BWins": 27
+	},
+	{
+		"AName": "Blood Takahiro",
+		"BName": "Blood Ruby Ivan Slagpot",
+		"ARank": 7,
+		"BRank": 4,
+		"AWins": 23,
+		"BWins": 34
+	},
+	{
+		"AName": "Blood Takahiro",
+		"BName": "Diamond Ruby Marshal Josephina",
+		"ARank": 7,
+		"BRank": 5,
+		"AWins": 10,
+		"BWins": 21
+	},
+	{
+		"AName": "Blood Takahiro",
+		"BName": "Blood Bloodspinner Zorath",
+		"ARank": 7,
+		"BRank": 6,
+		"AWins": 18,
+		"BWins": 16
+	},
+	{
+		"AName": "Diamond Blood Marshal Josephina",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 8,
+		"BRank": 0,
+		"AWins": 66,
+		"BWins": 69
+	},
+	{
+		"AName": "Diamond Blood Marshal Josephina",
+		"BName": "Saphire Ruby Morgan McBombus",
+		"ARank": 8,
+		"BRank": 1,
+		"AWins": 37,
+		"BWins": 45
+	},
+	{
+		"AName": "Diamond Blood Marshal Josephina",
+		"BName": "Saphire Wild Ivan Slagpot",
+		"ARank": 8,
+		"BRank": 2,
+		"AWins": 19,
+		"BWins": 13
+	},
+	{
+		"AName": "Diamond Blood Marshal Josephina",
+		"BName": "Ruby Angus the Arsonist",
+		"ARank": 8,
+		"BRank": 3,
+		"AWins": 20,
+		"BWins": 17
+	},
+	{
+		"AName": "Diamond Blood Marshal Josephina",
+		"BName": "Blood Ruby Ivan Slagpot",
+		"ARank": 8,
+		"BRank": 4,
+		"AWins": 31,
+		"BWins": 27
+	},
+	{
+		"AName": "Diamond Blood Marshal Josephina",
+		"BName": "Diamond Ruby Marshal Josephina",
+		"ARank": 8,
+		"BRank": 5,
+		"AWins": 13,
+		"BWins": 18
+	},
+	{
+		"AName": "Diamond Blood Marshal Josephina",
+		"BName": "Blood Bloodspinner Zorath",
+		"ARank": 8,
+		"BRank": 6,
+		"AWins": 11,
+		"BWins": 11
+	},
+	{
+		"AName": "Diamond Blood Marshal Josephina",
+		"BName": "Blood Takahiro",
+		"ARank": 8,
+		"BRank": 7,
+		"AWins": 14,
+		"BWins": 6
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Blood Wild Kagulichu",
+		"ARank": 9,
+		"BRank": 0,
+		"AWins": 22,
+		"BWins": 90
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Saphire Ruby Morgan McBombus",
+		"ARank": 9,
+		"BRank": 1,
+		"AWins": 23,
+		"BWins": 66
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Saphire Wild Ivan Slagpot",
+		"ARank": 9,
+		"BRank": 2,
+		"AWins": 6,
+		"BWins": 41
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Ruby Angus the Arsonist",
+		"ARank": 9,
+		"BRank": 3,
+		"AWins": 5,
+		"BWins": 25
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Blood Ruby Ivan Slagpot",
+		"ARank": 9,
+		"BRank": 4,
+		"AWins": 6,
+		"BWins": 23
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Diamond Ruby Marshal Josephina",
+		"ARank": 9,
+		"BRank": 5,
+		"AWins": 6,
+		"BWins": 25
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Blood Bloodspinner Zorath",
+		"ARank": 9,
+		"BRank": 6,
+		"AWins": 3,
+		"BWins": 29
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Blood Takahiro",
+		"ARank": 9,
+		"BRank": 7,
+		"AWins": 8,
+		"BWins": 12
+	},
+	{
+		"AName": "Saphire Wild Winter Moon",
+		"BName": "Diamond Blood Marshal Josephina",
+		"ARank": 9,
+		"BRank": 8,
+		"AWins": 3,
+		"BWins": 20
+	}
+]
