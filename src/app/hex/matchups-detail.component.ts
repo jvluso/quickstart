@@ -42,11 +42,12 @@ export class MatchupsDetailComponent implements OnInit {
   constructor(private matchupsService: MatchupsService) {}
   
   getMatchups(): void {
-      this.matchupsService.getMatchups().then(matchups => this.matchups = matchups);
+    this.matchupsService.getMatchups().then(matchups => this.matchups = matchups);
   }
   
   ngOnInit(): void {
-      this.getMatchups();
+    console.log('oninit');
+    this.getMatchups();
   }
 }
 
