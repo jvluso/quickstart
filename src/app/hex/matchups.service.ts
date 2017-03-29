@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Matchups } from './matchups';
 import { Archetype } from './archetype';
 import { Message } from './message';
+import { MessageService } from './message.service';
 import { MESSAGES } from './mock-messages';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -12,7 +13,8 @@ export class MatchupsService {
   
   private messagesUrl = 'api/messages';
   
-  constructor(private http: Http) {}
+  constructor(private http: Http,
+              private messageService: MessageService) {}
   
   
   calculateMatchups(messages: Message[]): Matchups {
@@ -28,12 +30,12 @@ export class MatchupsService {
       for (let j = 0; j < size; j++) {
         if (i < j) {
           let message: Message = messages.filter(message => message.ARank === j && message.BRank === i)[0];
-          winPercents.push(message.BWins / (message.AWins + message.BWins));
+          winPercents.push(message.BWins * 200 / (message.AWins + message.BWins) - 100);
         }else if (i === j) {
           winPercents.push(0);
         }else {
           let message: Message = messages.filter(message => message.ARank === i && message.BRank === j)[0];
-          winPercents.push(message.AWins / (message.AWins + message.BWins));
+          winPercents.push(message.AWins * 200 / (message.AWins + message.BWins) - 100);
         }
       }
       let message: Message = messages.filter(message => message.ARank === i)[0];
@@ -56,14 +58,13 @@ export class MatchupsService {
     
   getMatchups(): Promise<Matchups> {
     console.log('getMatchups');
-    return this.http.get(this.messagesUrl)
-                         .toPromise()
-                         .then(response => this.calculateMatchups(response.json().data) as Matchups)
+    return this.messageService.getMessages()
+                         .then(response => this.calculateMatchups(response) as Matchups)
                          .catch(this.handleError);
   }
   
   private handleError(error: any): Promise<any> {
-      console.error('an error occured', error);
+      console.warn('an error occured', error);
       return Promise.reject(error.message || error);
   }
   
